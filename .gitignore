@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/cache/*
+!data/cache/.gitkeep
+_backup_v1/
+
+# added for GitHub upload
+_backup_v2_before_funky/
+_backup_v3_before_arabic/
+cache/
+.claude/
+MASAR_App/android/build/
+MASAR_App/android/.gradle/
+*.apk
+*.keystore
+*.jks
+.streamlit/secrets.toml
+

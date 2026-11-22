@@ -1,0 +1,7 @@
+﻿# MASAR Routing V1
+osmnx>=2.0
+networkx>=3.2
+pandas>=2.0
+numpy>=1.24
+streamlit>=1.50
+pytest>=8.0
