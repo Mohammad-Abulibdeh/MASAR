@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مسار</string>
+    <string name="nav_channel">الملاحة</string>
+    <string name="nav_running">الملاحة شغالة</string>
+    <string name="leave_channel">تذكير «اطلع هلأ»</string>
+    <string name="car_idle_title">اختار وجهتك على الموبايل</string>
+    <string name="car_idle_text">افتح مسار على الموبايل، اختار وين بدك تروح واضغط «يلا نمشي». الطريق بيظهر هون.</string>
+    <string name="car_stop">إيقاف</string>
+</resources>

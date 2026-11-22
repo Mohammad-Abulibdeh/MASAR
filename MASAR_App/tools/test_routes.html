@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MASAR router vs Python engine</title>
+<pre id="out">running</pre>
+<script src="../www/data/network.js"></script>
+<script src="../www/routing.js"></script>
+<script>
+fetch('golden_routes.json').then((r) => r.json()).then((golden) => {
+  let checks = 0;
+  const bad = [];
+  for (const g of golden) {
+    for (const mode of ['distance', 'fastest', 'masar']) {
+      const r = MasarRouter.route(g.from, g.to, mode, g.preset), want = g.routes[mode];
+      checks++;
+      if (!r) { bad.push([g.preset, g.from, g.to, mode, 'no route']); continue; }
+      /* Optimal cost must match. Equal-cost ties may pick another path, so compare only the optimised value. */
+      if (mode === 'distance' && Math.abs(r.distance - want.distance) > 0.5) bad.push([g.preset, g.from, g.to, mode, r.distance, want.distance]);
+      if (mode === 'masar' && Math.abs(r.time - want.time) > 0.5) bad.push([g.preset, g.from, g.to, mode, r.time, want.time]);
+      if (mode === 'fastest' && Math.abs(r.free - want.free) > 0.5) bad.push([g.preset, g.from, g.to, mode, r.free, want.free]);
+    }
+    const opts = MasarRouter.options(g.from, g.to, g.preset);
+    checks++;
+    if (!opts.length || opts[0].time > g.routes.masar.time + 0.5) bad.push([g.preset, g.from, g.to, 'options', opts[0] && opts[0].time, g.routes.masar.time]);
+  }
+  document.getElementById('out').textContent = JSON.stringify({ trips: golden.length, checks, failures: bad.length, bad: bad.slice(0, 10) }, null, 1);
+});
+</script>

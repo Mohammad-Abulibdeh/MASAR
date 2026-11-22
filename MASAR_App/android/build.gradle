@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application' version '8.7.3'
+}
+
+def assetsDir = layout.buildDirectory.dir('masarAssets').get().asFile
+
+android {
+    namespace 'com.masar.app'
+    compileSdk 35
+    buildToolsVersion '35.0.1'
+
+    defaultConfig {
+        applicationId 'com.masar.app'
+        minSdk 24
+        targetSdk 35
+        versionCode 9
+        versionName '1.6.1'
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('masar-signing.keystore')
+            storePassword 'masar123'
+            keyAlias 'masar'
+            keyPassword 'masar123'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['java']
+            res.srcDirs = ['res']
+            assets.srcDirs = [assetsDir]
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.car.app:app:1.4.0'
+}
+
+// The web interface is shared with the browser tests, so it is copied in at build time.
+tasks.register('copyWeb', Copy) {
+    from '../www'
+    into new File(assetsDir, 'www')
+}
+preBuild.dependsOn copyWeb

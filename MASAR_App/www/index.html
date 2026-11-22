@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>مسار</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-screen="splash">
+<div id="map" dir="ltr" aria-label="Map"></div>
+
+<section id="hello" class="screen"></section>
+<section id="home" class="screen"></section>
+<section id="welcome" class="screen"></section>
+<section id="pages" class="screen"></section>
+
+<section id="picker" class="screen overlay">
+  <button class="round back" data-back aria-label="Back"></button>
+  <div class="picker-title sticker" id="pickerTitle"></div>
+  <div class="center-pin" aria-hidden="true"></div>
+  <div class="picker-bar sticker">
+    <div class="picker-street" id="pickerStreet"></div>
+    <button class="btn pink" id="pickerOk"></button>
+  </div>
+</section>
+
+<section id="route" class="screen overlay">
+  <button class="round back" data-back aria-label="Back"></button>
+  <div class="sheet" id="routeSheet"></div>
+</section>
+
+<section id="drive" class="screen overlay">
+  <div class="drive-top sticker" id="driveTop"></div>
+  <button class="round drive-mic" id="driveMic"></button>
+  <div class="drive-bottom sticker" id="driveBottom"></div>
+</section>
+
+<section id="explore" class="screen overlay">
+  <button class="explore-search sticker" id="exploreSearch"></button>
+  <button class="round explore-locate" id="exploreLocate"></button>
+  <button class="fab" id="exploreReport"></button>
+</section>
+
+<nav id="tabs" class="tabbar" aria-label="Menu"></nav>
+
+<div id="modal" class="modal" hidden><div class="modal-card sticker" id="modalCard" role="dialog" aria-modal="true"></div></div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<section id="splash" class="screen">
+  <svg class="splash-roads" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="sparks">
+      <circle cx="60" cy="140" r="5"/><circle cx="340" cy="190" r="4"/><circle cx="320" cy="560" r="6"/>
+      <circle cx="80" cy="470" r="4"/><circle cx="250" cy="720" r="5"/><circle cx="150" cy="80" r="3"/>
+    </g>
+    <path class="r r2" d="M70 -20C60 140 190 170 170 290S60 430 110 820"/>
+    <path class="r r3" d="M420 620C300 620 300 500 210 450S120 240 300 -20"/>
+    <path class="r r1" id="splashRoute" d="M-30 760C80 680 40 560 140 520S260 470 230 400S190 340 200 318"/>
+    <path class="lane l2" d="M70 -20C60 140 190 170 170 290S60 430 110 820"/>
+    <path class="lane l3" d="M420 620C300 620 300 500 210 450S120 240 300 -20"/>
+    <path class="lane l1" d="M-30 760C80 680 40 560 140 520S260 470 230 400S190 340 200 318"/>
+    <g class="splash-car">
+      <g transform="scale(1.25)">
+        <rect x="-17" y="-11" width="34" height="22" rx="8"/>
+        <rect class="glass" x="2" y="-7.5" width="8" height="15" rx="3"/>
+        <circle class="lamp" cx="14" cy="-6" r="2.2"/><circle class="lamp" cx="14" cy="6" r="2.2"/>
+      </g>
+      <animateMotion id="splashDrive" dur="1.3s" begin="indefinite" fill="freeze" rotate="auto"
+        calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .25 1"><mpath href="#splashRoute"/></animateMotion>
+    </g>
+  </svg>
+  <div class="splash-center">
+    <div class="splash-badge">
+      <img class="splash-logo" src="logo-light.svg" alt="" data-logo>
+      <div class="shine"></div>
+    </div>
+    <div class="splash-word">مسار</div>
+    <div class="splash-tag" id="splashTag">طريقك أقصر، وصولك أسرع</div>
+  </div>
+  <div class="splash-wipe" aria-hidden="true"></div>
+</section>
+
+<script src="vendor/leaflet.js"></script>
+<script src="data/network.js"></script>
+<script src="data/pois.js"></script>
+<script src="routing.js"></script>
+<script src="app.js"></script>
+<script src="firebase-config.js"></script>
+<script src="pages.js"></script>
+<script src="features.js"></script>
+<script src="plus.js"></script>
+</body>
+</html>

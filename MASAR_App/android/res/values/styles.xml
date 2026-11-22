@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="masar_violet">#5A2BE0</color>
+    <!-- Background of the app icon, from the light logo (masar-logo-light.svg); values-night has the dark one. -->
+    <color name="masar_icon_bg">#F5EEE3</color>
+    <style name="MasarTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/masar_violet</item>
+        <item name="android:statusBarColor">@color/masar_violet</item>
+        <item name="android:navigationBarColor">@color/masar_violet</item>
+    </style>
+</resources>

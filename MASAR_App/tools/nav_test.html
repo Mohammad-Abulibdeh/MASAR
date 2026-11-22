@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MASAR navigation test</title>
+<script>
+/* Opens the real app with a fake GPS and voice, so a drive can be replayed with window.fakeFix(). */
+fetch('../www/index.html').then((r) => r.text()).then((html) => {
+  const mock = `<base href="../www/"><script>
+    window.spoken = []; window.navFlags = [];
+    window.MasarNative = { speak(t) { window.spoken.push(t); return true; }, setNavigating(v) { window.navFlags.push(v); } };
+    window.gps = { cb: null, err: null, cleared: 0 };
+    const fake = {
+      getCurrentPosition(ok) { ok({ coords: window.gps.here }); },
+      watchPosition(ok, err) { window.gps.cb = ok; window.gps.err = err; return 1; },
+      clearWatch() { window.gps.cleared++; window.gps.cb = null; },
+    };
+    Object.defineProperty(navigator, 'geolocation', { value: fake });
+    window.fakeFix = (lat, lng, o = {}) => window.gps.cb && window.gps.cb({ coords: {
+      latitude: lat, longitude: lng, accuracy: o.accuracy ?? 8, speed: o.speed ?? 10, heading: o.heading ?? null } });
+  <\/script>`;
+  document.open();
+  document.write(html.replace('<head>', `<head>${mock}`));
+  document.close();
+});
+</script>

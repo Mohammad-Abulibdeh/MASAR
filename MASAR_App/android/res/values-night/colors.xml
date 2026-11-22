@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background of the app icon when the phone is in dark mode (masar-logo-dark.svg). -->
+    <color name="masar_icon_bg">#042159</color>
+</resources>
